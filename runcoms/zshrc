@@ -10,4 +10,18 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
 # Customize to your needs...
+export GIT_CACHE_PATH="${HOME}/Workspace/.git_cache"
+export SCCACHE_BUCKET="electronjs-sccache"
+export SCCACHE_TWO_TIER=true
+export PATH=$PATH:$HOME/Workspace/depot_tools:$HOME/Workspace/Go/bin
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
